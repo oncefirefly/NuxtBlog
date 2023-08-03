@@ -1,28 +1,28 @@
 <script setup lang="ts">
+import { formatDate } from "@/utils/index";
+
 import { Post } from "@/types/index";
 
+// props
 const props = defineProps<{
   post: Post | null;
 }>();
 
+// composables
 const router = useRouter();
 
+// methods
 const handleBlogClick = () => {
   router.push({ path: `/${props?.post?.id}` });
 };
 </script>
 
 <template>
-  <div @click="handleBlogClick" class="max-w-lg h-96 cursor-pointer">
+  <div @click="handleBlogClick" class="max-w-lg h-96 cursor-pointer w-1/4">
     <div
       class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm flex flex-col h-full"
     >
       <div to="" class="w-full min-h-24 h-1/3 flex items-center justify-center">
-        <!-- <img
-          class="rounded-t-lg w-full h-full"
-          src="https://flowbite.com/docs/images/blog/image-1.jpg"
-          :alt="props?.post?.image"
-        /> -->
         <img
           class="rounded-t-lg w-full h-full"
           :src="props?.post?.image"
@@ -30,6 +30,9 @@ const handleBlogClick = () => {
         />
       </div>
       <div class="p-5 flex flex-col h-full">
+        <p class="text-xs text-gray-700 mb-3">
+          {{ formatDate(props?.post?.createdAt) }}
+        </p>
         <div href="#">
           <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2">
             {{ props?.post?.title }}

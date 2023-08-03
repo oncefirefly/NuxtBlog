@@ -31,6 +31,9 @@ const props = defineProps<{
         <h2 class="text-4xl font-semibold text-gray-100 leading-tight">
           {{ props?.post?.title }}
         </h2>
+        <h3 class="text-xl font-semibold text-gray-100 leading-tight">
+          {{ formatDate(props?.post?.createdAt) }}
+        </h3>
       </div>
     </div>
 
