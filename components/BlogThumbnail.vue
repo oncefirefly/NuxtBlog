@@ -1,32 +1,49 @@
 <script setup lang="ts">
+import { Post } from "@/types/index";
+
+const props = defineProps<{
+  post: Post | null;
+}>();
+
+const router = useRouter();
+
+const handleBlogClick = () => {
+  router.push({ path: `/${props?.post?.id}` });
+};
 </script>
 
 <template>
-  <div class="max-w-lg">
-    <div class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm">
-      <a href="#">
-        <img
-          class="rounded-t-lg"
+  <div @click="handleBlogClick" class="max-w-lg h-96 cursor-pointer">
+    <div
+      class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm flex flex-col h-full"
+    >
+      <div to="" class="w-full min-h-24 h-1/3 flex items-center justify-center">
+        <!-- <img
+          class="rounded-t-lg w-full h-full"
           src="https://flowbite.com/docs/images/blog/image-1.jpg"
-          alt=""
+          :alt="props?.post?.image"
+        /> -->
+        <img
+          class="rounded-t-lg w-full h-full"
+          :src="props?.post?.image"
+          :alt="props?.post?.image"
         />
-      </a>
-      <div class="p-5">
-        <a href="#">
+      </div>
+      <div class="p-5 flex flex-col h-full">
+        <div href="#">
           <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2">
-            Noteworthy technology acquisitions 2021
+            {{ props?.post?.title }}
           </h5>
-        </a>
+        </div>
         <p class="font-normal text-gray-700 mb-3">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
+          {{ props?.post?.preview }}
         </p>
-        <a
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center"
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 w-24 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mt-auto"
           href="#"
         >
           Read more
-        </a>
+        </button>
       </div>
     </div>
   </div>
